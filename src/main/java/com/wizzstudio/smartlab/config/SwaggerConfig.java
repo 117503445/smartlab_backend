@@ -16,7 +16,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
-        System.out.println("Hello");
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
