@@ -9,4 +9,4 @@ WORKDIR /app
 COPY --from=MAVEN_BUILD /build/target/smartlab.jar /app/
 ENV restpath="/api" dburl="" dbun="" dbpd=""
 EXPOSE 80
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/urandom","-jar", "smartlab.jar","--spring.data.rest.base-path=${restpath}","--spring.datasource.url=${dburl}","spring.datasource.username=${dbun}","spring.datasource.password=${dbpd}"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/urandom","-jar", "smartlab.jar","--spring.data.rest.base-path=${restpath}","--spring.datasource.url=${dburl}","--spring.datasource.username=${dbun}","--spring.datasource.password=${dbpd}"]
