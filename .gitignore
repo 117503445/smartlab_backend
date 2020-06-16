@@ -23,6 +23,6 @@
 hs_err_pid*
 .idea
 .mvn
-*.properties
+application.properties
 /target
 smartlab_backend.iml
