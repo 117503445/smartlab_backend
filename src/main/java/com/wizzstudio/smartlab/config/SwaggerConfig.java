@@ -16,7 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.SWAGGER_2).host("smartlab.backend.117503445.top")
                 .pathMapping("/")
                 .select()
                 .apis(RequestHandlerSelectors.any())
