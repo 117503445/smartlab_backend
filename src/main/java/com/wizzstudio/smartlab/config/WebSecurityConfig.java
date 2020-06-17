@@ -74,6 +74,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
 
+
+
+
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationErrorHandler)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
@@ -91,8 +94,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
+                .antMatchers("/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/swagger-ui.html",
+                        "/webjars/**").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/v2/api-docs", "/swagger-ui.html/swagger-resources/configuration/ui", "/swagger-ui.html/swagger-resources/configuration/security", "/swagger-ui.html/swagger-resources", "swagger-resources/configuration/ui", "swagger-resources/configuration/security", "swagger-resources").permitAll()
+
                 // .antMatchers("/api/register").permitAll()
                 // .antMatchers("/api/activate").permitAll()
                 // .antMatchers("/api/account/reset-password/init").permitAll()
