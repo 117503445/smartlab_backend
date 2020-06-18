@@ -1,11 +1,11 @@
+server.port=80
+
 spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://{host}/{databasename}
+spring.data.rest.base-path= /api
+
+spring.datasource.url=jdbc:mysql://{host}:{port}/{dbname}
 spring.datasource.username=
 spring.datasource.password=
-server.port=80
-spring.data.rest.base-path= /api
-app.version=@project.version@
-app.build.time=@timestamp@
 
 jwt.header=Authorization
 # This token must be encoded using Base64 with mininum 88 Bits (you can type `echo 'secret-key'|base64` on your command line)
@@ -16,3 +16,5 @@ jwt.route.authentication.path=auth
 jwt.route.authentication.refresh=refresh
 
 swaggerhost=localhost
+app.version=@project.version@
+app.build.time=@timestamp@

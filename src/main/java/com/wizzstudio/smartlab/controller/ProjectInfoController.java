@@ -2,6 +2,7 @@ package com.wizzstudio.smartlab.controller;
 
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +23,7 @@ public class ProjectInfoController {
     @Value("${app.build.time}")
     private String buildTime;
 
-
+    @Secured("ROLE_ADMIN")
     @GetMapping(path = "ver", produces = "application/json")
     public @ResponseBody
     String getAllRecords() {
