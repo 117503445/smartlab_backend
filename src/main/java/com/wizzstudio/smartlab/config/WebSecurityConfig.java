@@ -75,8 +75,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
 
 
-
-
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationErrorHandler)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
@@ -98,15 +96,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
-                .antMatchers("/api/authenticate").permitAll()
+                //.antMatchers("/api/authenticate").permitAll()
 
                 // .antMatchers("/api/register").permitAll()
                 // .antMatchers("/api/activate").permitAll()
                 // .antMatchers("/api/account/reset-password/init").permitAll()
                 // .antMatchers("/api/account/reset-password/finish").permitAll()
 
-                .antMatchers("/api/person").hasAuthority("ROLE_USER")
-                .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
+//                .antMatchers("/api/person").hasAuthority("ROLE_USER")
+//                .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
                 .anyRequest().permitAll()
                 //.anyRequest().permitAll()
 
