@@ -10,6 +10,7 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.RequestParameterBuilder;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.RequestParameter;
+import springfox.documentation.service.Server;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -42,9 +43,10 @@ public class SwaggerConfig {
 //        List<RequestParameter> pars = new ArrayList<>();
 //        tokenPar.name("Authorization").description("JWT Authorization").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
 //        pars.add(tokenPar.build());
-
-
-        return new Docket(DocumentationType.OAS_30)
+        //todo update to spring fox 3.0.1
+        //https://github.com/springfox/springfox/issues/3483
+        Server s = new Server("server",swaggerHost,"d", new ArrayList<>(),new ArrayList<>());
+        return new Docket(DocumentationType.OAS_30).servers(s)
                 .pathMapping("/")
                 .select()
                 .apis(RequestHandlerSelectors.any())
