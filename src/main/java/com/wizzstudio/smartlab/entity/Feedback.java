@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Feedback {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String type;//问题类型
