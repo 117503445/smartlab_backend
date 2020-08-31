@@ -5,12 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.ModelRef;
+import springfox.documentation.builders.RequestParameterBuilder;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
+import springfox.documentation.service.RequestParameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -36,18 +35,21 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
 
-        ParameterBuilder tokenPar = new ParameterBuilder();
-        List<Parameter> pars = new ArrayList<>();
-        tokenPar.name("Authorization").description("JWT Authorization").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
-        pars.add(tokenPar.build());
+        RequestParameter requestParameter = new RequestParameterBuilder().name("Authorization").description("JWT Authorization").required(false).build();
+        List<RequestParameter> globalRequestParameters = new ArrayList<>();
+        globalRequestParameters.add(requestParameter);
+//        ParameterBuilder tokenPar = new ParameterBuilder();
+//        List<RequestParameter> pars = new ArrayList<>();
+//        tokenPar.name("Authorization").description("JWT Authorization").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+//        pars.add(tokenPar.build());
 
 
-        return new Docket(DocumentationType.SWAGGER_2).host(swaggerHost)
+        return new Docket(DocumentationType.OAS_30)
                 .pathMapping("/")
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build().globalOperationParameters(pars).apiInfo(new ApiInfoBuilder()
+                .build().globalRequestParameters(globalRequestParameters).apiInfo(new ApiInfoBuilder()
                         .title("SmartLab")
                         .description("XDU 物理实验计算器 后端")
                         .version(String.format("%s %s UTC+0", version, buildTime))
