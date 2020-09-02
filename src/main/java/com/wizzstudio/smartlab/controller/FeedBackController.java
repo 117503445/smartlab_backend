@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RequestMapping("/api/feedback")
 @RestController
 public class FeedBackController {
@@ -27,5 +29,17 @@ public class FeedBackController {
     public FeedBackGetDto save(@RequestBody FeedBackSetDto feedBackSetDto) {
         var feedBackEntity = feedBackSetDto.toEntity();
         return FeedBackGetDto.fromEntity(feedBackRepository.save(feedBackEntity));
+    }
+
+    @GetMapping(value = "csv", produces = "application/json;charset=gbk")
+    public String toCSV(HttpServletResponse response) {
+        response.setHeader("Content-Disposition", "attachment;filename=feedback.csv");
+        var feedBacks = feedBackRepository.findAll();
+        StringBuilder s = new StringBuilder();
+        s.append("Id,ContactInfo,Type,Content\n");
+        for (var feedback : feedBacks) {
+            s.append(String.format("%s,%s,%s,%s\n", feedback.getId(), feedback.getContactInfo(), feedback.getType(), feedback.getContent()));
+        }
+        return s.toString();
     }
 }

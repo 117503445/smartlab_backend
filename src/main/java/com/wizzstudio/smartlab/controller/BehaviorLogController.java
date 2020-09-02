@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RequestMapping("/api/BehaviorLog")
 @RestController
 public class BehaviorLogController {
@@ -27,5 +29,17 @@ public class BehaviorLogController {
     public BehaviorLogGetDto save(@RequestBody BehaviorLogSetDto behaviorLogSetDto) {
         var behaviorLogEntity = behaviorLogSetDto.toEntity();
         return BehaviorLogGetDto.fromEntity(behaviorLogRepository.save(behaviorLogEntity));
+    }
+
+    @GetMapping(value = "csv", produces = "application/json;charset=gbk")
+    public String toCSV(HttpServletResponse response) {
+        response.setHeader("Content-Disposition", "attachment;filename=BehaviorLog.csv");
+        var behaviorLogs = behaviorLogRepository.findAll();
+        StringBuilder s = new StringBuilder();
+        s.append("Id,CreatedTimeStamp,Openid,Page,Control\n");
+        for (var behaviorLog : behaviorLogs) {
+            s.append(String.format("%s,%s,%s,%s,%s\n", behaviorLog.getId(),behaviorLog.getCreatedTimeStamp(),behaviorLog.getOpenid(),behaviorLog.getPage(),behaviorLog.getControl() ));
+        }
+        return s.toString();
     }
 }
