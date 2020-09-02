@@ -1,28 +1,13 @@
-package com.wizzstudio.smartlab.entity;
+package com.wizzstudio.smartlab.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import com.wizzstudio.smartlab.entity.BehaviorLogEntity;
 
-import javax.persistence.*;
-
-@EntityListeners(AuditingEntityListener.class)
-@Entity
-public class BehaviorLog {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-
+public class BehaviorLogGetDto {
     private Integer id;
-
     private String openid;
     private String page;//页面
     private String control;//控件
-
-    @CreatedDate
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private long createdTimeStamp;
-
 
     public Integer getId() {
         return id;
@@ -62,5 +47,15 @@ public class BehaviorLog {
 
     public void setCreatedTimeStamp(long createdTimeStamp) {
         this.createdTimeStamp = createdTimeStamp;
+    }
+
+    public static BehaviorLogGetDto fromEntity(BehaviorLogEntity behaviorLogEntity) {
+        BehaviorLogGetDto behaviorLogGetDto = new BehaviorLogGetDto();
+        behaviorLogGetDto.setId(behaviorLogEntity.getId());
+        behaviorLogGetDto.setControl(behaviorLogEntity.getControl());
+        behaviorLogGetDto.setCreatedTimeStamp(behaviorLogEntity.getCreatedTimeStamp());
+        behaviorLogGetDto.setOpenid(behaviorLogEntity.getOpenid());
+        behaviorLogGetDto.setPage(behaviorLogEntity.getPage());
+        return behaviorLogGetDto;
     }
 }

@@ -1,10 +1,11 @@
 package com.wizzstudio.smartlab.repository;
 
-import com.wizzstudio.smartlab.entity.Feedback;
-import org.springframework.data.repository.CrudRepository;
+import com.wizzstudio.smartlab.entity.FeedbackEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "feedback", path = "feedback")
-public interface FeedBackRepository extends CrudRepository<Feedback, Integer> {
+//@RepositoryRestResource(collectionResourceRel = "feedback", path = "feedback")
+@RepositoryRestResource(exported = false)
+public interface FeedBackRepository extends JpaRepository<FeedbackEntity, Integer> {
 
 }

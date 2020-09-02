@@ -12,7 +12,7 @@
     </parent>
     <groupId>com.wizzstudio</groupId>
     <artifactId>smartlab</artifactId>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>0.4.0-SNAPSHOT</version>
     <name>smartlab</name>
     <description>Demo project for Spring Boot</description>
 
