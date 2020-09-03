@@ -2,6 +2,7 @@ package com.wizzstudio.smartlab.controller;
 
 import com.wizzstudio.smartlab.dto.BehaviorLogGetDto;
 import com.wizzstudio.smartlab.dto.BehaviorLogSetDto;
+import com.wizzstudio.smartlab.entity.BehaviorLogEntity;
 import com.wizzstudio.smartlab.repository.BehaviorLogRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,9 +37,9 @@ public class BehaviorLogController {
         response.setHeader("Content-Disposition", "attachment;filename=BehaviorLog.csv");
         var behaviorLogs = behaviorLogRepository.findAll();
         StringBuilder s = new StringBuilder();
-        s.append("Id,CreatedTimeStamp,Openid,Page,Control\n");
+        s.append(BehaviorLogEntity.getCSVHeader());
         for (var behaviorLog : behaviorLogs) {
-            s.append(String.format("%s,%s,%s,%s,%s\n", behaviorLog.getId(),behaviorLog.getCreatedTimeStamp(),behaviorLog.getOpenid(),behaviorLog.getPage(),behaviorLog.getControl() ));
+            s.append(behaviorLog.toCSV());
         }
         return s.toString();
     }

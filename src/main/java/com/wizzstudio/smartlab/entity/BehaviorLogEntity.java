@@ -64,4 +64,12 @@ public class BehaviorLogEntity {
     public void setCreatedTimeStamp(long createdTimeStamp) {
         this.createdTimeStamp = createdTimeStamp;
     }
+
+    public static String getCSVHeader() {
+        return "Id,CreatedTimeStamp,Openid,Page,Control\n";
+    }
+
+    public String toCSV() {
+        return String.format("%s,%s,%s,%s,%s\n", this.getId(),this.getCreatedTimeStamp(),this.getOpenid(),this.getPage(),this.getControl());
+    }
 }

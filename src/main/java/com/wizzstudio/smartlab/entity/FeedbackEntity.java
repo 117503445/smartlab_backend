@@ -62,4 +62,12 @@ public class FeedbackEntity {
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
     }
+
+    public static String getCSVHeader() {
+        return "Id,openid,page,ContactInfo,Type,Content\n";
+    }
+
+    public String toCSV() {
+        return String.format("%s,%s,%s,%s,%s,%s\n", this.getId(), this.getOpenid(), this.getPage(), this.getContactInfo(), this.getType(), this.getContent());
+    }
 }

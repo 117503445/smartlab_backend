@@ -2,6 +2,7 @@ package com.wizzstudio.smartlab.controller;
 
 import com.wizzstudio.smartlab.dto.FeedBackGetDto;
 import com.wizzstudio.smartlab.dto.FeedBackSetDto;
+import com.wizzstudio.smartlab.entity.FeedbackEntity;
 import com.wizzstudio.smartlab.repository.FeedBackRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,9 +37,9 @@ public class FeedBackController {
         response.setHeader("Content-Disposition", "attachment;filename=feedback.csv");
         var feedBacks = feedBackRepository.findAll();
         StringBuilder s = new StringBuilder();
-        s.append("Id,ContactInfo,Type,Content\n");
+        s.append(FeedbackEntity.getCSVHeader());
         for (var feedback : feedBacks) {
-            s.append(String.format("%s,%s,%s,%s\n", feedback.getId(), feedback.getContactInfo(), feedback.getType(), feedback.getContent()));
+            s.append(feedback.toCSV());
         }
         return s.toString();
     }
