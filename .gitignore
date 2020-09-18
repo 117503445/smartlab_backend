@@ -26,3 +26,5 @@ hs_err_pid*
 application.properties
 /target
 smartlab_backend.iml
+script/get_data_log/data
+script/get_data_log/__pycache__
