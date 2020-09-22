@@ -4,18 +4,23 @@ import file_util
 import json
 import time
 import shutil
+import json
 
-debug = True
+config = json.loads(file_util.read_all_text('config.json'))
+
+debug = config['debug']
 
 if debug:
     host = 'http://localhost:80/api/DataLog?pageSize=99999'
 else:
     host = 'https://smartlab.backend.117503445.top/api/DataLog?pageSize=99999'
 
+
 dir_data = pathlib.Path('data')
 
 
 def main():
+    print(host)
 
     if dir_data.exists():
         shutil.rmtree(dir_data)
