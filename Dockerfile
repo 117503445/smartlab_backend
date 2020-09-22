@@ -1,7 +1,7 @@
 FROM maven:3.6.3-openjdk-14 AS MAVEN_BUILD
 COPY pom.xml /build/
 COPY src /build/src/
-COPY ./src/main/resources/app.properties /build/src/main/resources/application.properties
+COPY ./src/main/resources/app.yml /build/src/main/resources/application.yml
 WORKDIR /build/
 RUN mvn package -Dmaven.test.skip=true
 FROM openjdk:14-alpine
