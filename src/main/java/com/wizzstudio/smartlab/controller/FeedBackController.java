@@ -43,9 +43,18 @@ public class FeedBackController {
         return FeedBackGetDto.fromEntity(feedBackRepository.save(feedBackEntity));
     }
 
-    @GetMapping(value = "csv", produces = "application/json;charset=gbk")
-    public String toCSV(HttpServletResponse response) {
+    @GetMapping(value = "download", produces = "application/json;charset=gbk")
+    public String downloadCSV(HttpServletResponse response) {
         response.setHeader("Content-Disposition", "attachment;filename=feedback.csv");
+        return getFeedbackCSV();
+    }
+
+    @GetMapping(value = "view", produces = "application/json;charset=gbk")
+    public String viewCSV() {
+        return getFeedbackCSV();
+    }
+
+    private String getFeedbackCSV() {
         var feedBacks = feedBackRepository.findAll();
         StringBuilder s = new StringBuilder();
         s.append(FeedbackEntity.getCSVHeader());
